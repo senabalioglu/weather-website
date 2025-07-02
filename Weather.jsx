@@ -3,11 +3,21 @@ import React, { useEffect, useState } from "react";
 const Weather = () => {
   const [weather, setWeather] = useState(null);
 
+  const weatherCodeMap = {
+    0: "Açık Gökyüzü",
+    1: "Kısmen Bulutlu",
+    2: "Bulutlu",
+    3: "Hafif Yağmur",
+    45: "Sis",
+    48: "Donan Sis",
+    51: "Çiseleme",
+  };
+
   useEffect(() => {
     const fetchWeather = async () => {
       try {
         const res = await fetch(
-          `http://api.weatherapi.com/v1/current.json?key=99b272c9728c4e40863163705250207&q=Istanbul&aqi=no`
+          `https://api.open-meteo.com/v1/forecast?latitude=41.0138&longitude=28.9497&current_weather=true&daily=weathercode&timezone=auto`
         );
         const data = await res.json();
 
@@ -24,9 +34,9 @@ const Weather = () => {
 
   return (
     <div>
-      <h2>{weather.current.condition.text} Hava Durumu</h2>
-      <p>Sıcaklık: {weather.current.temp_c}°C</p>
-      <p>Tarih: {weather.location.localtime}</p>
+      <h2>{weatherCodeMap[weather.current_weather.weathercode]} Hava Durumu</h2>
+      <p>Sıcaklık: {weather.current_weather.temperature}°C</p>
+      <p>Bölge: {weather.timezone}</p>
     </div>
   );
 };
