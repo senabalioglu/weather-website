@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import resimDen from './src/assets/awatar.png'
 
 const Weather = () => {
   const [weather, setWeather] = useState(null);
@@ -35,6 +36,7 @@ const Weather = () => {
   return (
     <div>
       <h2>{weatherCodeMap[weather.current_weather.weathercode]} Hava Durumu</h2>
+      <img src={resimDen} alt="resim" />
       <p>Sıcaklık: {weather.current_weather.temperature}°C</p>
       <p>Bölge: {weather.timezone}</p>
     </div>
