@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import weatherIcons from "./src/assets/weatherIcons";
 import WeatherInfo from "./WeatherInfo";
+import WeatherWeek from "./WeatherWeek";
+import WeatherDay from "./WeatherDay";
 
 const Weather = () => {
   const [weather, setWeather] = useState(null);
@@ -35,14 +37,18 @@ const Weather = () => {
   return (
     <>
       <div className="outline-container">
-        <div className="weather-container">
-          <div className="icon-container">
-            <img src={weatherCodeMap[weather.current_weather.weathercode]} />
-            <p>Bölge: {weather.timezone}</p>
-          </div>
-          <div>
-            <WeatherInfo weatherValue={weather} />
-          </div>
+        <div className="inner-container">
+          <WeatherDay weatherMap={weatherCodeMap} weatherVal={weather} />
+          <WeatherInfo weatherValue={weather} />
+        </div>
+        <div className="week-container" >
+          <WeatherWeek />
+          <WeatherWeek />
+          <WeatherWeek />
+          <WeatherWeek />
+          <WeatherWeek />
+          <WeatherWeek />
+          <WeatherWeek />
         </div>
       </div>
     </>
@@ -58,9 +64,8 @@ export default Weather;
             <img src={weatherCodeMap[weather.current_weather.weathercode]} />
             <p>Bölge: {weather.timezone}</p>
           </div>
-          <div>
-            <WeatherInfo weatherValue={weather} />
-          </div>
+          <WeatherInfo weatherValue={weather} />
+          <WeatherWeek />
         </div>
       </div>
 */
