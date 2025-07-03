@@ -14,7 +14,50 @@ body{
   align-items: center;
 }
 */
-body{
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: rgb(191, 218, 241);
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  align-items: center;
+}
+
+.outline-container {
+  border: 1px solid rgba(0, 0, 0, 0);
+  border-radius: 10px;
+  background-color: rgb(93, 201, 252);
+  box-shadow: 10px 8px 10px rgba(0, 0, 0, 0.144);
+  margin: 40px;
+  padding: 50px;
+}
+
+.weather-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding: 50px;
+}
+
+.icon-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}
+
+.currnet-img{
+  height: 50px;
+  width: 100%;
+}
+
+.weather-info{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
