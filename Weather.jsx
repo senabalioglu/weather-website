@@ -34,6 +34,17 @@ const Weather = () => {
 
   if (!weather) return <p>Yükleniyor...</p>;
 
+  const formattedDay = weather.daily.time.map((d, index) => ({
+    date: new Date(d).toLocaleDateString("tr-TR", {
+      weekday: "long",
+    }),
+    code: weather.daily.weathercode[index],
+    max: weather.daily.temperature_2m_max[index],
+    min: weather.daily.temperature_2m_min[index],
+  }));
+
+  console.log(formattedDay);
+
   return (
     <>
       <div className="outline-container">
@@ -41,14 +52,12 @@ const Weather = () => {
           <WeatherDay weatherMap={weatherCodeMap} weatherVal={weather} />
           <WeatherInfo weatherValue={weather} />
         </div>
-        <div className="week-container" >
-          <WeatherWeek />
-          <WeatherWeek />
-          <WeatherWeek />
-          <WeatherWeek />
-          <WeatherWeek />
-          <WeatherWeek />
-          <WeatherWeek />
+        <div className="week-container">
+          {formattedDay.map((day, index) => (
+            <div key={index}>
+              <WeatherWeek weatherMap={weatherCodeMap} weatherVal={day} />
+            </div>
+          ))}
         </div>
       </div>
     </>

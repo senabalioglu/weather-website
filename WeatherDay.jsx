@@ -1,4 +1,5 @@
 function WeatherDay({weatherMap, weatherVal}) {
+    
   return (
     <>
       <div className="day-container" >
