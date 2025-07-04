@@ -3,9 +3,12 @@ import weatherIcons from "./src/assets/weatherIcons";
 import WeatherInfo from "./WeatherInfo";
 import WeatherWeek from "./WeatherWeek";
 import WeatherDay from "./WeatherDay";
+import { motion } from "motion/react";
 
 const Weather = () => {
   const [weather, setWeather] = useState(null);
+  //const [dayData, setDayData] = useState(null);
+  const [ind, setInd] = useState();
 
   const weatherCodeMap = {
     0: weatherIcons.clearday,
@@ -13,6 +16,14 @@ const Weather = () => {
     2: weatherIcons.cloudy,
     3: weatherIcons.showers,
     45: weatherIcons.fog,
+  };
+
+  const weatherCodeStateMap = {
+    0: "Açık",
+    1: "Parçalı Bulutlu",
+    2: "Bulutlu",
+    3: "Sağanak Yağış",
+    45: "Sisli",
   };
 
   useEffect(() => {
@@ -43,19 +54,35 @@ const Weather = () => {
     min: weather.daily.temperature_2m_min[index],
   }));
 
-  console.log(formattedDay);
+  const handlePress = (index) => {
+    setInd(index);
+  };
 
   return (
     <>
       <div className="outline-container">
         <div className="inner-container">
-          <WeatherDay weatherMap={weatherCodeMap} weatherVal={weather} />
-          <WeatherInfo weatherValue={weather} />
+          <WeatherDay
+            itemIndex={ind}
+            data={formattedDay}
+            weatherMap={weatherCodeMap}
+            weatherVal={weather}
+          />
+          <WeatherInfo
+            itemIndex={ind}
+            data={formattedDay}
+            weatherState={weatherCodeStateMap}
+            weatherValue={weather}
+          />
         </div>
         <div className="week-container">
           {formattedDay.map((day, index) => (
             <div key={index}>
-              <WeatherWeek weatherMap={weatherCodeMap} weatherVal={day} />
+              <WeatherWeek
+                onPress={() => handlePress(index)}
+                weatherMap={weatherCodeMap}
+                weatherVal={day}
+              />
             </div>
           ))}
         </div>
@@ -65,16 +92,3 @@ const Weather = () => {
 };
 
 export default Weather;
-
-/*
-<div className="outline-container">
-        <div className="weather-container">
-          <div className="icon-container">
-            <img src={weatherCodeMap[weather.current_weather.weathercode]} />
-            <p>Bölge: {weather.timezone}</p>
-          </div>
-          <WeatherInfo weatherValue={weather} />
-          <WeatherWeek />
-        </div>
-      </div>
-*/
