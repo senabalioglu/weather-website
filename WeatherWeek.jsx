@@ -9,8 +9,8 @@ function WeatherWeek({ weatherMap, weatherVal, onPress }) {
       <motion.div
         onClick={onPress}
         whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          onHoverStart={() => console.log("hover started!")}
+        whileTap={{ scale: 0.95 }}
+        onHoverStart={() => console.log("hover started!")}
         onMouseDown={() => setIsPressed(true)}
         onMouseUp={() => setIsPressed(false)}
         onMouseLeave={() => setIsPressed(false)}

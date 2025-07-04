@@ -9,6 +9,21 @@ const Weather = () => {
   const [weather, setWeather] = useState(null);
   //const [dayData, setDayData] = useState(null);
   const [ind, setInd] = useState();
+  const [selectedCity, setSelectedCity] = useState("Istanbul");
+  const [formattedZone, setFormattedZone] = useState({latitude: "41.0082",longitude: "28.9784"});
+  //const [city, setCity] = useState("");
+
+  useEffect(() => {
+  if (!formattedZone) return;
+  if (selectedCity) {
+    setFormattedZone({
+      latitude: zoneMap[selectedCity][0],
+      longitude: zoneMap[selectedCity][1],
+    });
+  } else {
+    setFormattedZone(null);
+  }
+}, [selectedCity]);
 
   const weatherCodeMap = {
     0: weatherIcons.clearday,
@@ -26,11 +41,30 @@ const Weather = () => {
     45: "Sisli",
   };
 
+  const zoneMap = {
+    //zoneMap.selectedCity.map... (gibi)
+    Istanbul: ["41.0082", "28.9784"],
+    Ankara: ["39.9208", "32.8541"],
+    Izmir: ["38.4192", "27.1287"],
+    Bursa: ["40.1828", "29.0663"],
+    Adana: ["37.0", "35.3213"],
+    Antalya: ["36.8969", "30.7133"],
+    Konya: ["37.8714", "32.4846"],
+    Gaziantep: ["37.0662", "37.3833"],
+    Diyarbakir: ["37.9144", "40.2306"],
+    Trabzon: ["41.0015", "39.7178"],
+  };
+
+  const handleCityChange = (city) => {
+    setSelectedCity(city);
+  };
+
   useEffect(() => {
+    if (!formattedZone) return;
     const fetchWeather = async () => {
       try {
         const res = await fetch(
-          `https://api.open-meteo.com/v1/forecast?latitude=41.0138&longitude=28.9497&current_weather=true&hourly=temperature_2m,weathercode,precipitation,relative_humidity_2m,windspeed_10m&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum&timezone=auto`
+          `https://api.open-meteo.com/v1/forecast?latitude=${formattedZone.latitude}&longitude=${formattedZone.longitude}&current_weather=true&hourly=temperature_2m,weathercode,precipitation,relative_humidity_2m,windspeed_10m&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum&timezone=auto`
         );
         const data = await res.json();
 
@@ -41,7 +75,7 @@ const Weather = () => {
     };
 
     fetchWeather();
-  }, []);
+  }, [formattedZone]);
 
   if (!weather) return <p>Yükleniyor...</p>;
 
@@ -63,6 +97,7 @@ const Weather = () => {
       <div className="outline-container">
         <div className="inner-container">
           <WeatherDay
+            onCityChange={handleCityChange}
             itemIndex={ind}
             data={formattedDay}
             weatherMap={weatherCodeMap}
