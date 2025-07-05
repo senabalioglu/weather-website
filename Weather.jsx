@@ -7,23 +7,25 @@ import { motion } from "motion/react";
 
 const Weather = () => {
   const [weather, setWeather] = useState(null);
-  //const [dayData, setDayData] = useState(null);
   const [ind, setInd] = useState();
   const [selectedCity, setSelectedCity] = useState("Istanbul");
-  const [formattedZone, setFormattedZone] = useState({latitude: "41.0082",longitude: "28.9784"});
-  //const [city, setCity] = useState("");
+  const [formattedZone, setFormattedZone] = useState({
+    latitude: "41.0082",
+    longitude: "28.9784",
+  });
+  const [weatherCode, setWeatherCode] = useState(0);
 
   useEffect(() => {
-  if (!formattedZone) return;
-  if (selectedCity) {
-    setFormattedZone({
-      latitude: zoneMap[selectedCity][0],
-      longitude: zoneMap[selectedCity][1],
-    });
-  } else {
-    setFormattedZone(null);
-  }
-}, [selectedCity]);
+    if (!formattedZone) return;
+    if (selectedCity) {
+      setFormattedZone({
+        latitude: zoneMap[selectedCity][0],
+        longitude: zoneMap[selectedCity][1],
+      });
+    } else {
+      setFormattedZone(null);
+    }
+  }, [selectedCity]);
 
   const weatherCodeMap = {
     0: weatherIcons.clearday,
@@ -39,6 +41,14 @@ const Weather = () => {
     2: "Bulutlu",
     3: "Sağanak Yağış",
     45: "Sisli",
+  };
+
+  const weatherBackgroundMap = {
+    0: "weather-clear",
+    1: "weather-partly-cloudy-day",
+    2: "weather-cloudy",
+    3: "weather-showers",
+    45: "weather-fog",
   };
 
   const zoneMap = {
@@ -69,13 +79,22 @@ const Weather = () => {
         const data = await res.json();
 
         setWeather(data);
+        if (data?.daily?.weathercode?.[0] != null) {
+          setWeatherCode(data.daily.weathercode[0]);
+        }
       } catch (error) {
         console.error("İstek hatası:", error);
       }
+      const newClass = weatherBackgroundMap[weatherCode] || "weather-default";
+
+      Object.values(weatherBackgroundMap).forEach((cls) =>
+        document.body.classList.remove(cls)
+      );
+      document.body.classList.add(newClass);
     };
 
     fetchWeather();
-  }, [formattedZone]);
+  }, [formattedZone, weatherCode]);
 
   if (!weather) return <p>Yükleniyor...</p>;
 
@@ -117,6 +136,7 @@ const Weather = () => {
                 onPress={() => handlePress(index)}
                 weatherMap={weatherCodeMap}
                 weatherVal={day}
+
               />
             </div>
           ))}

@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 
-function WeatherWeek({ weatherMap, weatherVal, onPress }) {
+function WeatherWeek({ weatherMap, weatherVal, onPress}) {
   const [isPressed, setIsPressed] = useState(false);
+  
 
   return (
     <>
@@ -24,7 +25,7 @@ function WeatherWeek({ weatherMap, weatherVal, onPress }) {
         <p>{weatherVal.date}</p> {/*weather.daily.weathercode*/}
         <img className="image-week" src={weatherMap[weatherVal.code]} />
         <p>
-          {weatherVal.max}°C {weatherVal.min}°C{" "}
+          {Math.floor(weatherVal.max)}° {Math.floor(weatherVal.min)}°
         </p>{" "}
         {/*weather.daily.temperature_2m_max    weather.daily.temperature_2m_min */}
       </motion.div>

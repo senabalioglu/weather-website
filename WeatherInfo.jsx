@@ -11,14 +11,14 @@ function WeatherInfo({weatherValue, weatherState, data, itemIndex}){
             <div className="info-container">
             <h1>Hava Durumu</h1>
             {/*<h2>{selectedDay.}</h2>*/}
-            <h2>{selectedDay.max}°C</h2>
+            <h2>{Math.floor(selectedDay.max)}°C</h2>
             <p style={{fontSize: 20}} >{selectedDay.date}</p>
         </div>
         ) : (
             <div className="info-container">
             <h1>Hava Durumu</h1>
             <h2>{weatherState[weatherValue.current_weather.weathercode]}</h2>
-            <h2>{weatherValue.current_weather.temperature}°C</h2>
+            <h2>{Math.floor(weatherValue.current_weather.temperature)}°C</h2>
             <p style={{fontSize: 20}} >{formattedDayDate}</p>
         </div>
         )

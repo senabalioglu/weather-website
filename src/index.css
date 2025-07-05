@@ -16,12 +16,37 @@ body{
 */
 
 body{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  margin: 0;
   font-family: "DM Sans", sans-serif;
   background-color: rgb(165, 240, 240);
   display: flex;
   justify-content: center;
   min-height: 100vh;
   align-items: center;
+}
+
+body.weather-clear{
+background-image: url('assets/background/clearday-image.jpg');
+}
+
+body.weather-partly-cloudy-day{
+background-image: url('assets/background/partly-cloudy-image.jpg');
+}
+
+body.weather-cloudy{
+background-image: url('assets/background/cloudy-image.jpg');
+}
+
+body.weather-showers{
+background-image: url('assets/background/sowery-image.png');
+}
+
+body.weather-fog{
+background-image: url('assets/background/foggy-image.jpg');
 }
 
 .image-week{
@@ -40,7 +65,7 @@ body{
 }
 
 .outline-container{
-  background-color: rgb(104, 226, 226);
+  backdrop-filter: blur(15px);
   display: flex;
   flex-direction: column;
   justify-content: center;
