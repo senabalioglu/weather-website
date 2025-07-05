@@ -4,6 +4,9 @@ import WeatherInfo from "./WeatherInfo";
 import WeatherWeek from "./WeatherWeek";
 import WeatherDay from "./WeatherDay";
 import { motion } from "motion/react";
+import weatherCodeMap from "./src/assets/weatherCodeMap";
+import weatherCodeStateMap from "./src/assets/weatherCodeStateMap";
+import weatherBackgroundMap from "./src/assets/weatherBackgroundMap";
 
 const Weather = () => {
   const [weather, setWeather] = useState(null);
@@ -26,30 +29,6 @@ const Weather = () => {
       setFormattedZone(null);
     }
   }, [selectedCity]);
-
-  const weatherCodeMap = {
-    0: weatherIcons.clearday,
-    1: weatherIcons.partlycloudyday,
-    2: weatherIcons.cloudy,
-    3: weatherIcons.showers,
-    45: weatherIcons.fog,
-  };
-
-  const weatherCodeStateMap = {
-    0: "Açık",
-    1: "Parçalı Bulutlu",
-    2: "Bulutlu",
-    3: "Sağanak Yağış",
-    45: "Sisli",
-  };
-
-  const weatherBackgroundMap = {
-    0: "weather-clear",
-    1: "weather-partly-cloudy-day",
-    2: "weather-cloudy",
-    3: "weather-showers",
-    45: "weather-fog",
-  };
 
   const zoneMap = {
     //zoneMap.selectedCity.map... (gibi)
@@ -81,6 +60,7 @@ const Weather = () => {
         setWeather(data);
         if (data?.daily?.weathercode?.[0] != null) {
           setWeatherCode(data.daily.weathercode[0]);
+          console.log(weatherCode)
         }
       } catch (error) {
         console.error("İstek hatası:", error);
@@ -109,6 +89,7 @@ const Weather = () => {
 
   const handlePress = (index) => {
     setInd(index);
+
   };
 
   return (
@@ -123,6 +104,7 @@ const Weather = () => {
             weatherVal={weather}
           />
           <WeatherInfo
+            cityTrigger={selectedCity}
             itemIndex={ind}
             data={formattedDay}
             weatherState={weatherCodeStateMap}
@@ -145,5 +127,7 @@ const Weather = () => {
     </>
   );
 };
+
+
 
 export default Weather;

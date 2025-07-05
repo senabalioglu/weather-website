@@ -49,6 +49,22 @@ body.weather-fog{
 background-image: url('assets/background/foggy-image.jpg');
 }
 
+body.weather-heavy-showers{
+background-image: url('assets/background/rainy-image.jpg');
+}
+
+body.weather-snow{
+background-image: url('assets/background/snow.jpg');
+}
+
+body.weather-heavy-snow{
+background-image: url('assets/background/heavy-snow-image.jpg');
+}
+
+body.weather-thunder{
+background-image: url('assets/background/thunder.jpg');
+}
+
 .image-week{
   width: 110px;
   height: 110px;
@@ -65,12 +81,11 @@ background-image: url('assets/background/foggy-image.jpg');
 }
 
 .outline-container{
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(20px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 30px;
-  border: 1px solid rgb(146, 146, 146);
   border-radius: 20px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
   

@@ -1,23 +1,13 @@
 import { useEffect, useState } from "react";
+import { motion } from "motion/react";
+import cities from "./src/assets/cities";
 
 function WeatherDay({ weatherMap, weatherVal, data, itemIndex, onCityChange }) {
 
   const [selectedCity, setSelectedCity] = useState("");
 
   const selectedDay = data?.[itemIndex];
-
-  const cities = [ //setCity {cities.kullanıcıdan alınan değer}
-      { name: "Istanbul", lat: 41.0082, lon: 28.9784 },
-      { name: "Ankara", lat: 39.9208, lon: 32.8541 },
-      { name: "Izmir", lat: 38.4192, lon: 27.1287 },
-      { name: "Bursa", lat: 40.1828, lon: 29.0663 },
-      { name: "Adana", lat: 37.0, lon: 35.3213 },
-      { name: "Antalya", lat: 36.8969, lon: 30.7133 },
-      { name: "Konya", lat: 37.8714, lon: 32.4846 },
-      { name: "Gaziantep", lat: 37.0662, lon: 37.3833 },
-      { name: "Diyarbakir", lat: 37.9144, lon: 40.2306 },
-      { name: "Trabzon", lat: 41.0015, lon: 39.7178 },
-    ];
+  const isDay = weatherVal.is_day;
 
     function handleChange(event){
       const city = event.target.value;
@@ -27,12 +17,19 @@ function WeatherDay({ weatherMap, weatherVal, data, itemIndex, onCityChange }) {
   return (
     <>
       {selectedDay ? (
-        <div className="day-container">
+        <motion.div 
+        key={`weather-${itemIndex}-${selectedCity}-${selectedDay}`} //`weather-${itemIndex}-${weatherValue.timezone}` selectedDay || selectedCity || itemIndex
+        initial={{ scale: 0 }} animate={{ scale: 1 }} 
+        className="day-container"
+        >
           <img src={weatherMap[selectedDay.code]} />
           <h3>{weatherVal.timezone}</h3>
-        </div>
+        </motion.div>
       ) : (
-        <div className="day-container">
+        <motion.div 
+        key={`weather-${itemIndex}-${selectedCity}-${selectedDay}`}
+        initial={{ scale: 0 }} animate={{ scale: 1 }} 
+        className="day-container">
           <img src={weatherMap[weatherVal.current_weather.weathercode]} />
           <select value={selectedCity} onChange={handleChange} >
             {
@@ -40,7 +37,7 @@ function WeatherDay({ weatherMap, weatherVal, data, itemIndex, onCityChange }) {
             }
           </select>
           <h3>{weatherVal.timezone}</h3> {/*weatherVal.timezone*/}
-        </div>
+        </motion.div>
       )}
     </>
   );

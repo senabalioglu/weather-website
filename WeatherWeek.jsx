@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 
-function WeatherWeek({ weatherMap, weatherVal, onPress}) {
+function WeatherWeek({ weatherMap, weatherVal, onPress, isCitySelected}) {
   const [isPressed, setIsPressed] = useState(false);
   
 
   return (
     <>
-      <motion.div
+      <div
         onClick={onPress}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
@@ -28,7 +28,7 @@ function WeatherWeek({ weatherMap, weatherVal, onPress}) {
           {Math.floor(weatherVal.max)}° {Math.floor(weatherVal.min)}°
         </p>{" "}
         {/*weather.daily.temperature_2m_max    weather.daily.temperature_2m_min */}
-      </motion.div>
+      </div>
     </>
   );
 }
