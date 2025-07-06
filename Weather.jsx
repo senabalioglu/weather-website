@@ -5,6 +5,7 @@ import WeatherWeek from "./WeatherWeek";
 import WeatherDay from "./WeatherDay";
 import { motion } from "motion/react";
 import weatherCodeMap from "./src/assets/weatherCodeMap";
+import weatherCodeMapNight from "./src/assets/weatherCodeMapNight";
 import weatherCodeStateMap from "./src/assets/weatherCodeStateMap";
 import weatherBackgroundMap from "./src/assets/weatherBackgroundMap";
 
@@ -101,6 +102,7 @@ const Weather = () => {
             itemIndex={ind}
             data={formattedDay}
             weatherMap={weatherCodeMap}
+            weatherMapNight = {weatherCodeMapNight}
             weatherVal={weather}
           />
           <WeatherInfo

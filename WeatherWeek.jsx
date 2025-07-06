@@ -1,17 +1,16 @@
 import { useState } from "react";
 import { motion } from "motion/react";
 
-function WeatherWeek({ weatherMap, weatherVal, onPress, isCitySelected}) {
+function WeatherWeek({ weatherMap, weatherVal, onPress, isCitySelected, weatherMapNight}) {
   const [isPressed, setIsPressed] = useState(false);
-  
 
   return (
     <>
       <div
         onClick={onPress}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-        onHoverStart={() => console.log("hover started!")}
+        //whileHover={{ scale: 1.1 }}
+        //whileTap={{ scale: 0.95 }}
+        //onHoverStart={() => console.log("hover started!")}
         onMouseDown={() => setIsPressed(true)}
         onMouseUp={() => setIsPressed(false)}
         onMouseLeave={() => setIsPressed(false)}

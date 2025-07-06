@@ -1,8 +1,8 @@
 import weatherIcons from "./weatherIcons";
 
-const weatherCodeMap = {
-  0: weatherIcons.clearday,
-  1: weatherIcons.partlycloudyday,
+const weatherCodeMapNight = {
+  0: weatherIcons.clearnight,
+  1: weatherIcons.partlycloudynight,
   2: weatherIcons.cloudy,
   3: weatherIcons.heavyshowers,
   45: weatherIcons.fog,
@@ -24,4 +24,4 @@ const weatherCodeMap = {
   80: weatherIcons.showers,
 };
 
-export default weatherCodeMap;
+export default weatherCodeMapNight;

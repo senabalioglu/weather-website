@@ -111,3 +111,10 @@ background-image: url('assets/background/thunder.jpg');
   align-items: center;
   justify-content: center;
 }
+
+select{
+  width: 140px;
+  border-radius: 5px;
+  height: 25px;
+  font-family: "DM Sans", sans-serif;
+}
