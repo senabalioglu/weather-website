@@ -10,7 +10,6 @@ function WeatherDay({
   onCityChange,
   weatherMapNight,
 }) {
-  console.log(weatherVal.current_weather.is_day);
 
   const [selectedCity, setSelectedCity] = useState("");
 

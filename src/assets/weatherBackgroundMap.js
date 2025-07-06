@@ -22,11 +22,20 @@ const weatherBackgroundMap = {
     80: "weather-showers",
     81: "weather-showers",
     82: "weather-heavy-showers",
-    85: "weather-snow",
+    85: "weather-sleet",
     86: "weather-heavy-snow",
     95: "weather-thunder",
-    96: "weather-thunder",
-    99: "weather-thunder",
+    96: "weather-thunder-snow",
+    99: "weather-thunder-snow",
   };
 
 export default weatherBackgroundMap;
+
+/*
+body.weather-clear-night{
+
+}
+body.weather-partly-cloudy-night{
+
+}
+*/

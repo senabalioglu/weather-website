@@ -8,6 +8,7 @@ import weatherCodeMap from "./src/assets/weatherCodeMap";
 import weatherCodeMapNight from "./src/assets/weatherCodeMapNight";
 import weatherCodeStateMap from "./src/assets/weatherCodeStateMap";
 import weatherBackgroundMap from "./src/assets/weatherBackgroundMap";
+import weatherBackgroundNightMap from "./src/assets/weatherBackgroundNightMap";
 
 const Weather = () => {
   const [weather, setWeather] = useState(null);
@@ -51,31 +52,42 @@ const Weather = () => {
 
   useEffect(() => {
     if (!formattedZone) return;
+
     const fetchWeather = async () => {
       try {
         const res = await fetch(
           `https://api.open-meteo.com/v1/forecast?latitude=${formattedZone.latitude}&longitude=${formattedZone.longitude}&current_weather=true&hourly=temperature_2m,weathercode,precipitation,relative_humidity_2m,windspeed_10m&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum&timezone=auto`
         );
         const data = await res.json();
-
         setWeather(data);
+
         if (data?.daily?.weathercode?.[0] != null) {
           setWeatherCode(data.daily.weathercode[0]);
-          console.log(weatherCode)
         }
       } catch (error) {
         console.error("İstek hatası:", error);
       }
-      const newClass = weatherBackgroundMap[weatherCode] || "weather-default";
-
-      Object.values(weatherBackgroundMap).forEach((cls) =>
-        document.body.classList.remove(cls)
-      );
-      document.body.classList.add(newClass);
     };
 
     fetchWeather();
-  }, [formattedZone, weatherCode]);
+  }, [formattedZone]);
+
+  useEffect(() => {
+    if (!weather) return;
+
+    const isDay = weather?.current_weather?.is_day === 1;
+    const code = weather?.current_weather?.weathercode;
+
+    const newClass = isDay
+      ? weatherBackgroundMap[code] || "weather-default"
+      : weatherBackgroundNightMap[code] || "weather-default";
+
+    [
+      ...Object.values(weatherBackgroundMap),
+      ...Object.values(weatherBackgroundNightMap),
+    ].forEach((cls) => document.body.classList.remove(cls));
+    document.body.classList.add(newClass);
+  }, [weather]);
 
   if (!weather) return <p>Yükleniyor...</p>;
 
@@ -90,7 +102,6 @@ const Weather = () => {
 
   const handlePress = (index) => {
     setInd(index);
-
   };
 
   return (
@@ -102,7 +113,7 @@ const Weather = () => {
             itemIndex={ind}
             data={formattedDay}
             weatherMap={weatherCodeMap}
-            weatherMapNight = {weatherCodeMapNight}
+            weatherMapNight={weatherCodeMapNight}
             weatherVal={weather}
           />
           <WeatherInfo
@@ -120,7 +131,6 @@ const Weather = () => {
                 onPress={() => handlePress(index)}
                 weatherMap={weatherCodeMap}
                 weatherVal={day}
-
               />
             </div>
           ))}
@@ -129,7 +139,5 @@ const Weather = () => {
     </>
   );
 };
-
-
 
 export default Weather;

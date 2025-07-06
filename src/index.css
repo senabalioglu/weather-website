@@ -30,11 +30,27 @@ body{
 }
 
 body.weather-clear{
-background-image: url('assets/background/clearday-image.jpg');
+background-image: url('assets/background/clear-img.jpg');
+}
+
+body.weather-clear-night{
+background-image: url('assets/background/c-night.jpg');
+}
+
+body.weather-partly-cloudy-night{
+background-image: url('assets/background/partly-cloudy-night-img.jpg');
+}
+
+body.weather-sleet{
+background-image: url('assets/background/snow.jpg');
+}
+
+body.weather-thunder-snow{
+background-image: url('assets/background/heavy-snow-image.jpg');
 }
 
 body.weather-partly-cloudy-day{
-background-image: url('assets/background/partly-cloudy-image.jpg');
+background-image: url('assets/background/p-cloudy-image.jpg');
 }
 
 body.weather-cloudy{
@@ -42,7 +58,7 @@ background-image: url('assets/background/cloudy-image.jpg');
 }
 
 body.weather-showers{
-background-image: url('assets/background/sowery-image.png');
+background-image: url('assets/background/rainy-image.jpg');
 }
 
 body.weather-fog{
@@ -50,7 +66,7 @@ background-image: url('assets/background/foggy-image.jpg');
 }
 
 body.weather-heavy-showers{
-background-image: url('assets/background/rainy-image.jpg');
+background-image: url('assets/background/sowery-image.png');
 }
 
 body.weather-snow{
